@@ -46,9 +46,11 @@ const ChatContent = (props) => {
           {latestMessageText}
         </Typography>
       </Box>
+      {numberOfUnreadMessages !== 0 && (
       <Box className={classes.unreadMessagesContainer}>
         <Chip size="small" label={numberOfUnreadMessages} className={classes.unreadMessages}/>
       </Box>
+      )}
     </Box>
   );
 };
