@@ -2,7 +2,6 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import { BadgeAvatar, ChatContent } from "../Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
-import { setActiveChat } from "../../store/activeConversation";
 import { connect } from "react-redux";
 import { markAsRead } from "../../store/utils/thunkCreators";
 
@@ -22,15 +21,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Chat = (props) => {
   const classes = useStyles();
-  const { conversation } = props;
+  const { conversation, user } = props;
   const { otherUser } = conversation;
 
-  const handleClick = async (conversation) => {
-    await props.markAsRead(conversation.id, conversation.otherUser.username);
+  const handleClick = async (conversation, user) => {
+    await props.markAsRead(conversation.id, conversation.otherUser.username, conversation.numberOfUnreadMessages, user.id);
   };
 
   return (
-    <Box onClick={() => handleClick(conversation)} className={classes.root}>
+    <Box onClick={() => handleClick(conversation, user)} className={classes.root}>
       <BadgeAvatar
         photoUrl={otherUser.photoUrl}
         username={otherUser.username}
@@ -44,8 +43,8 @@ const Chat = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    markAsRead: (conversationId, username) => {
-      dispatch(markAsRead(conversationId, username));
+    markAsRead: (conversationId, username, numberOfUnreadMessages, userId) => {
+      dispatch(markAsRead(conversationId, username, numberOfUnreadMessages, userId));
     }
   };
 };

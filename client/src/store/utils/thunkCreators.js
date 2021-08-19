@@ -5,6 +5,7 @@ import {
   addConversation,
   setNewMessage,
   setSearchedUsers,
+  setReadMessages 
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 import { setActiveChat } from '../activeConversation';
@@ -119,9 +120,13 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
   }
 };
 
-export const markAsRead = (conversationId, username) => async (dispatch) => {
+export const markAsRead = (conversationId, username, numberOfUnreadMessages, userId) => async (dispatch) => {
   try {
-    const { data } = await axios.patch(`/api/messages/${conversationId}`);
+    if (numberOfUnreadMessages !== 0) {
+      await axios.patch(`/api/messages/${conversationId}`);
+      dispatch(setReadMessages(conversationId, userId));
+    }
+    
     dispatch(setActiveChat(username));
   } catch (error) {
     console.error(error);
