@@ -46,10 +46,14 @@ router.post("/", async (req, res, next) => {
 router.patch("/:conversationId", async (req, res, next) => {
   try {
     const conversationId = req.params.conversationId;
-    const messages = await Message.findAll({ where: { conversationId }});
-    console.log(messages)
-    res.json({'response': 'whatever'})
-    // convert messages to read
+    const messages = await Message.findAll({ where: { conversationId, read: false }});
+
+    for (const message of messages) {
+      message.read = true;
+      await message.save();
+    }
+
+    res.json({ updated: true });
   } catch (error) {
     next(error);
   }
