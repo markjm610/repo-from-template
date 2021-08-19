@@ -7,6 +7,7 @@ import {
   setSearchedUsers,
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
+import { setActiveChat } from '../activeConversation';
 
 axios.interceptors.request.use(async function (config) {
   const token = await localStorage.getItem("messenger-token");
@@ -117,3 +118,12 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const markAsRead = (conversationId, username) => async (dispatch) => {
+  try {
+    const { data } = await axios.patch(`/api/messages/${conversationId}`);
+    dispatch(setActiveChat(username));
+  } catch (error) {
+    console.error(error);
+  }
+}
