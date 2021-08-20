@@ -85,7 +85,6 @@ export const addNewConvoToStore = (state, recipientId, message) => {
 };
 
 export const markAsReadInStore = (state, conversationId, userId) => {
-  // return state;
   return state.map((convo) => {
     if (convo.id === conversationId) {
       const newConvo = { ...convo };
@@ -101,4 +100,32 @@ export const markAsReadInStore = (state, conversationId, userId) => {
       return convo;
     }
   });
-}
+};
+
+export const receiveAsReadInStore = (state, conversationId, lastReadMessageId) => {
+  console.log('receiveAsReadInStore')
+  console.log('conversationId', conversationId)
+  console.log('lastReadMessageId', lastReadMessageId)
+
+  return state.map((convo) => {
+    if (convo.id === conversationId) {
+      const newConvo = { ...convo };
+      newConvo.messages = [...convo.messages];
+      console.log('convo.id === conversationId')
+      for (const message of newConvo.messages) {
+        if (!message.read) {
+          console.log('!message.read')
+          message.read = true;
+        }
+        if (message.id === lastReadMessageId) {
+          console.log('message.id === lastReadMessageId')
+          break;
+        }
+      }
+      console.log('messages', newConvo.messages)
+      return newConvo;
+    } else {
+      return convo;
+    }
+  });
+};

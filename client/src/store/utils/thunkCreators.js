@@ -120,15 +120,23 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
   }
 };
 
-export const markAsRead = (conversationId, username, numberOfUnreadMessages, userId) => async (dispatch) => {
+const sendReadMessages = (conversationId, lastReadMessageId) => {
+  socket.emit("read-messages", {
+    conversationId,
+    lastReadMessageId
+  })
+}
+
+export const markAsRead = (conversationId, username, numberOfUnreadMessages, userId, lastReadMessage) => async (dispatch) => {
   try {
     if (numberOfUnreadMessages !== 0) {
       await axios.patch(`/api/messages/${conversationId}`);
       dispatch(setReadMessages(conversationId, userId));
+      sendReadMessages(conversationId, lastReadMessage.id);
     }
     
     dispatch(setActiveChat(username));
   } catch (error) {
     console.error(error);
   }
-}
+};

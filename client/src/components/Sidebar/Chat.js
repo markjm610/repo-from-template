@@ -25,7 +25,7 @@ const Chat = (props) => {
   const { otherUser } = conversation;
 
   const handleClick = async (conversation, user) => {
-    await props.markAsRead(conversation.id, conversation.otherUser.username, conversation.numberOfUnreadMessages, user.id);
+    await props.markAsRead(conversation.id, conversation.otherUser.username, conversation.numberOfUnreadMessages, user.id, conversation.messages[conversation.messages.length - 1]);
   };
 
   return (
@@ -43,8 +43,8 @@ const Chat = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    markAsRead: (conversationId, username, numberOfUnreadMessages, userId) => {
-      dispatch(markAsRead(conversationId, username, numberOfUnreadMessages, userId));
+    markAsRead: (conversationId, username, numberOfUnreadMessages, userId, lastReadMessage) => {
+      dispatch(markAsRead(conversationId, username, numberOfUnreadMessages, userId, lastReadMessage));
     }
   };
 };
