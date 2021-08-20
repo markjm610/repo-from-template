@@ -95,6 +95,7 @@ export const markAsReadInStore = (state, conversationId, userId) => {
           message.read = true;
         }
       })
+      newConvo.numberOfUnreadMessages = 0;
       return newConvo
     } else {
       return convo;
