@@ -21,13 +21,13 @@ socket.on("connect", () => {
   });
 
   socket.on("new-message", (data) => {
-    store.dispatch(setNewMessage(data.message, data.sender));
+    const activeConversation = store.getState().activeConversation;
+    store.dispatch(setNewMessage(data.message, data.sender, activeConversation));
   });
 
   socket.on("read-messages", (data) => {
     store.dispatch(receiveReadMessages(data.conversationId, data.lastReadMessageId));
   });
-
 
 });
 
