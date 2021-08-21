@@ -21,8 +21,8 @@ socket.on("connect", () => {
   });
 
   socket.on("new-message", (data) => {
-    const activeConversation = store.getState().activeConversation;
-    store.dispatch(setNewMessage(data.message, data.sender, activeConversation));
+    const { activeConversation }  = store.getState();
+    store.dispatch(setNewMessage(data.message, data.sender, activeConversation, data.username));
   });
 
   socket.on("read-messages", (data) => {

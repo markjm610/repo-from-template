@@ -90,6 +90,7 @@ const sendMessage = (data, body) => {
     message: data.message,
     recipientId: body.recipientId,
     sender: data.sender,
+    username: body.username
   });
 };
 
@@ -102,7 +103,7 @@ export const postMessage = (body) => async (dispatch) => {
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
     } else {
-      dispatch(setNewMessage(data.message));
+      dispatch(setNewMessage(data.message, null, null, body.self, body.username));
     }
 
     sendMessage(data, body);
