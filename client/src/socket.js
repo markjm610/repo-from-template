@@ -21,7 +21,15 @@ socket.on("connect", () => {
   });
 
   socket.on("new-message", (data) => {
-    const { activeConversation }  = store.getState();
+    const { activeConversation, conversations }  = store.getState();
+
+    if (activeConversation === data.username) {
+      socket.emit("read-messages", {
+        conversationId: conversations.find(conversation => conversation.otherUser.username === activeConversation).id,
+        lastReadMessageId: data.message.id,
+      });
+    }
+
     store.dispatch(setNewMessage(data.message, data.sender, activeConversation, data.username));
   });
 
