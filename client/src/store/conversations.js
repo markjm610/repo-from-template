@@ -29,10 +29,10 @@ export const gotConversations = (conversations) => {
   };
 };
 
-export const setNewMessage = (message, sender, activeConversation, self) => {
+export const setNewMessage = (message, sender, activeConversation, self, username) => {
   return {
     type: SET_MESSAGE,
-    payload: { message, sender: sender || null, activeConversation, self },
+    payload: { message, sender: sender || null, activeConversation, self, username },
   };
 };
 
@@ -110,10 +110,10 @@ const reducer = (state = [], action) => {
         action.payload.newMessage
       );
     case SET_READ_MESSAGES: {
-      return markAsReadInStore(state, action.payload.conversationId, action.payload.userId );
+      return markAsReadInStore(state, action.payload.conversationId, action.payload.userId);
     }
     case RECEIVE_READ_MESSAGES: {
-      return receiveAsReadInStore(state, action.payload.conversationId, action.payload.lastReadMessageId );
+      return receiveAsReadInStore(state, action.payload.conversationId, action.payload.lastReadMessageId);
     }
     default:
       return state;

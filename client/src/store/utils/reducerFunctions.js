@@ -11,7 +11,7 @@ export const addMessageToStore = (state, payload) => {
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
   }
-  
+
   return state.map((convo) => {
     if (convo.id === message.conversationId) {
       const newConvo = { ...convo };
@@ -120,7 +120,7 @@ export const receiveAsReadInStore = (state, conversationId, lastReadMessageId) =
       }
 
       newConvo.lastReadMessageId = lastReadMessageId;
-      
+
       return newConvo;
     } else {
       return convo;

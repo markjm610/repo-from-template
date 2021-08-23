@@ -21,7 +21,7 @@ socket.on("connect", () => {
   });
 
   socket.on("new-message", (data) => {
-    const { activeConversation, conversations }  = store.getState();
+    const { activeConversation, conversations } = store.getState();
 
     if (activeConversation === data.username) {
       socket.emit("read-messages", {
@@ -30,7 +30,7 @@ socket.on("connect", () => {
       });
     }
 
-    store.dispatch(setNewMessage(data.message, data.sender, activeConversation, data.username));
+    store.dispatch(setNewMessage(data.message, data.sender, activeConversation, false, data.username));
   });
 
   socket.on("read-messages", (data) => {
