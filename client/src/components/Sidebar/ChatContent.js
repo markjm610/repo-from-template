@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,16 +15,26 @@ const useStyles = makeStyles((theme) => ({
   },
   previewText: {
     fontSize: 12,
-    color: "#9CADC8",
     letterSpacing: -0.17,
+    color: numberOfUnreadMessages => numberOfUnreadMessages === 0 && "#9CADC8",
+    fontWeight: numberOfUnreadMessages => numberOfUnreadMessages !== 0 && "bold",
   },
+  unreadMessages: {
+    backgroundColor: '#3A8DFF',
+    color: "#FFFFFF",
+  },
+  unreadMessagesContainer: {
+    marginRight: 17,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 }));
 
 const ChatContent = (props) => {
-  const classes = useStyles();
-
   const { conversation } = props;
-  const { latestMessageText, otherUser } = conversation;
+  const { latestMessageText, otherUser, numberOfUnreadMessages } = conversation;
+  const classes = useStyles(numberOfUnreadMessages);
 
   return (
     <Box className={classes.root}>
@@ -36,6 +46,11 @@ const ChatContent = (props) => {
           {latestMessageText}
         </Typography>
       </Box>
+      {numberOfUnreadMessages !== 0 && (
+        <Box className={classes.unreadMessagesContainer}>
+          <Chip size="small" label={numberOfUnreadMessages} className={classes.unreadMessages} />
+        </Box>
+      )}
     </Box>
   );
 };

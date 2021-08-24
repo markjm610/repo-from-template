@@ -5,8 +5,10 @@ import {
   addConversation,
   setNewMessage,
   setSearchedUsers,
+  setReadMessages
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
+import { setActiveChat } from '../activeConversation';
 
 axios.interceptors.request.use(async function (config) {
   const token = await localStorage.getItem("messenger-token");
@@ -88,6 +90,7 @@ const sendMessage = (data, body) => {
     message: data.message,
     recipientId: body.recipientId,
     sender: data.sender,
+    username: body.username
   });
 };
 
@@ -96,11 +99,11 @@ const sendMessage = (data, body) => {
 export const postMessage = (body) => async (dispatch) => {
   try {
     const data = await saveMessage(body);
-    
+
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
     } else {
-      dispatch(setNewMessage(data.message));
+      dispatch(setNewMessage(data.message, null, null, body.self, body.username));
     }
 
     sendMessage(data, body);
@@ -113,6 +116,27 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
   try {
     const { data } = await axios.get(`/api/users/${searchTerm}`);
     dispatch(setSearchedUsers(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const sendReadMessages = (conversationId, lastReadMessageId) => {
+  socket.emit("read-messages", {
+    conversationId,
+    lastReadMessageId
+  })
+}
+
+export const markAsRead = (conversationId, username, numberOfUnreadMessages, userId, lastReadMessage) => async (dispatch) => {
+  try {
+    if (numberOfUnreadMessages !== 0) {
+      await axios.patch(`/api/messages/read`, { conversationId });
+      dispatch(setReadMessages(conversationId, userId));
+      sendReadMessages(conversationId, lastReadMessage.id);
+    }
+
+    dispatch(setActiveChat(username));
   } catch (error) {
     console.error(error);
   }
