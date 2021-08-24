@@ -3,7 +3,6 @@ import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
-  Box,
   Typography,
   Button,
   FormControl,
@@ -90,6 +89,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const textFieldInputLabelProps = {
+  required: false,
+  style: {
+    color: "#9CADC8",
+    fontSize: 20,
+  }
+};
+
 const Login = (props) => {
   const classes = useStyles();
   const history = useHistory();
@@ -154,12 +161,7 @@ const Login = (props) => {
               <Grid item xs={12} sm={12} md={12} lg={12}>
                 <FormControl className={classes.formControl}>
                   <TextField
-                    InputLabelProps={{
-                      required: false,
-                      style: {
-                        color: "#9CADC8"
-                      }
-                    }}
+                    InputLabelProps={textFieldInputLabelProps}
                     aria-label="username"
                     label="Username"
                     name="username"
@@ -172,12 +174,7 @@ const Login = (props) => {
               <Grid item xs={12} sm={12} md={12} lg={12}>
                 <FormControl className={classes.formControl}>
                   <TextField
-                    InputLabelProps={{
-                      required: false,
-                      style: {
-                        color: "#9CADC8"
-                      }
-                    }}
+                    InputLabelProps={textFieldInputLabelProps}
                     label="E-mail address"
                     aria-label="e-mail address"
                     type="email"
@@ -190,12 +187,7 @@ const Login = (props) => {
               <Grid item xs={12} sm={12} md={12} lg={12}>
                 <FormControl error={!!formErrorMessage.confirmPassword} className={classes.formControl}>
                   <TextField
-                    InputLabelProps={{
-                      required: false,
-                      style: {
-                        color: "#9CADC8"
-                      }
-                    }}
+                    InputLabelProps={textFieldInputLabelProps}
                     aria-label="password"
                     label="Password"
                     type="password"
@@ -212,12 +204,7 @@ const Login = (props) => {
               <Grid item xs={12} sm={12} md={12} lg={12}>
                 <FormControl error={!!formErrorMessage.confirmPassword} className={classes.formControl}>
                   <TextField
-                    InputLabelProps={{
-                      required: false,
-                      style: {
-                        color: "#9CADC8"
-                      }
-                    }}
+                    InputLabelProps={textFieldInputLabelProps}
                     label="Confirm Password"
                     aria-label="confirm password"
                     type="password"
