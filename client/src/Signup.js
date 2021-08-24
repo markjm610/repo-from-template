@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%'
   },
+  formHeading: {
+    fontWeight: '900',
+  },
   form: {
     width: '100%',
     // display: 'flex',
@@ -51,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     width: '100%'
+  },
+  button: {
+    backgroundColor: "#3A8DFF",
+    color: 'white'
   }
 }));
 
@@ -89,16 +96,17 @@ const Login = (props) => {
       </Grid>
       <Grid item md={7} lg={7} className={classes.rightSide} container justify="center">
         {/* <Grid className={classes.rightSide} container direction="column" justify="center" alignItems="center"> */}
-        <Grid item lg={12}>
-          <Typography>Create an account.</Typography>
+        <Grid item md={12} lg={12}>
           <Typography>Already have an account?</Typography>
           <Button onClick={() => history.push("/login")}>Login</Button>
         </Grid>
-        <Grid item lg={8} container justify="center">
+        <Grid item md={8} lg={8} container justify="center">
           <form className={classes.form} onSubmit={handleRegister}>
-            <Grid item lg={12}>
+            <Typography variant="h4" className={classes.formHeading}>Create an account.</Typography>
+            <Grid item md={12} lg={12}>
               <FormControl className={classes.formControl}>
                 <TextField
+                  InputLabelProps={{ required: false }}
                   aria-label="username"
                   label="Username"
                   name="username"
@@ -108,9 +116,10 @@ const Login = (props) => {
                 />
               </FormControl>
             </Grid>
-            <Grid item lg={12}>
+            <Grid item md={12} lg={12}>
               <FormControl className={classes.formControl}>
                 <TextField
+                  InputLabelProps={{ required: false }}
                   label="E-mail address"
                   aria-label="e-mail address"
                   type="email"
@@ -120,9 +129,10 @@ const Login = (props) => {
                 />
               </FormControl>
             </Grid>
-            <Grid item lg={12}>
+            <Grid item md={12} lg={12}>
               <FormControl error={!!formErrorMessage.confirmPassword} className={classes.formControl}>
                 <TextField
+                  InputLabelProps={{ required: false }}
                   aria-label="password"
                   label="Password"
                   type="password"
@@ -136,9 +146,10 @@ const Login = (props) => {
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Grid item lg={12}>
+            <Grid item md={12} lg={12}>
               <FormControl error={!!formErrorMessage.confirmPassword} className={classes.formControl}>
                 <TextField
+                  InputLabelProps={{ required: false }}
                   label="Confirm Password"
                   aria-label="confirm password"
                   type="password"
@@ -154,7 +165,7 @@ const Login = (props) => {
             </Grid>
             <Grid item container justify="center" lg={12}>
               <Grid item>
-                <Button type="submit" variant="contained" size="large">
+                <Button type="submit" variant="contained" size="large" className={classes.button}>
                   Create
                 </Button>
               </Grid>
