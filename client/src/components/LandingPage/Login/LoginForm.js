@@ -9,7 +9,7 @@ import {
     TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { register } from "../../../store/utils/thunkCreators";
+import { login } from "../../../store/utils/thunkCreators";
 
 const useStyles = makeStyles((theme) => ({
     switchFormText: {
