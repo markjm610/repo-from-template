@@ -40,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%'
   },
+  switchFormButton: {
+    backgroundColor: "white",
+    color: '#3A8DFF',
+    boxShadow: '1px 1px 1px gray'
+  },
   formHeading: {
     fontWeight: '900',
   },
@@ -95,10 +100,13 @@ const Login = (props) => {
         </Box>
       </Grid>
       <Grid item md={7} lg={7} className={classes.rightSide} container justify="center">
-        {/* <Grid className={classes.rightSide} container direction="column" justify="center" alignItems="center"> */}
-        <Grid item md={12} lg={12}>
-          <Typography>Already have an account?</Typography>
-          <Button onClick={() => history.push("/login")}>Login</Button>
+        <Grid item md={12} lg={12} container justify="flex-end" alignItems="center">
+          <Grid item>
+            <Typography>Already have an account?</Typography>
+          </Grid>
+          <Grid item>
+            <Button className={classes.switchFormButton} onClick={() => history.push("/login")}>Login</Button>
+          </Grid>
         </Grid>
         <Grid item md={8} lg={8} container justify="center">
           <form className={classes.form} onSubmit={handleRegister}>
@@ -172,7 +180,6 @@ const Login = (props) => {
             </Grid>
           </form>
         </Grid>
-        {/* </Grid> */}
       </Grid>
     </Grid>
   );
