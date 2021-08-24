@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
   previewText: {
     fontSize: 12,
     letterSpacing: -0.17,
+    color: numberOfUnreadMessages => numberOfUnreadMessages === 0 && "#9CADC8",
+    fontWeight: numberOfUnreadMessages => numberOfUnreadMessages !== 0 && "bold",
   },
   unreadMessages: {
     backgroundColor: '#3A8DFF',
@@ -30,10 +32,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ChatContent = (props) => {
-  const classes = useStyles();
-
   const { conversation } = props;
   const { latestMessageText, otherUser, numberOfUnreadMessages } = conversation;
+  const classes = useStyles(numberOfUnreadMessages);
 
   return (
     <Box className={classes.root}>
@@ -41,20 +42,14 @@ const ChatContent = (props) => {
         <Typography className={classes.username}>
           {otherUser.username}
         </Typography>
-        <Typography 
-        className={classes.previewText} 
-        style={{
-          color: numberOfUnreadMessages === 0 && "#9CADC8",
-          fontWeight: numberOfUnreadMessages !== 0 && "bold"
-          }}
-        >
+        <Typography className={classes.previewText}>
           {latestMessageText}
         </Typography>
       </Box>
       {numberOfUnreadMessages !== 0 && (
-      <Box className={classes.unreadMessagesContainer}>
-        <Chip size="small" label={numberOfUnreadMessages} className={classes.unreadMessages}/>
-      </Box>
+        <Box className={classes.unreadMessagesContainer}>
+          <Chip size="small" label={numberOfUnreadMessages} className={classes.unreadMessages} />
+        </Box>
       )}
     </Box>
   );
