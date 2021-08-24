@@ -72,11 +72,11 @@ const LoginForm = (props) => {
         <>
             <Grid className={classes.switchFormContainer} item xs={12} sm={12} md={12} lg={12} container justify="flex-end" alignItems="center" spacing={5}>
                 <Grid item xs={12} sm={7} md={9} lg={9}>
-                    <Typography className={classes.switchFormText}>Already have an account?</Typography>
+                    <Typography className={classes.switchFormText}>Don't have an account?</Typography>
                 </Grid>
                 <Grid item container justify="center" xs={12} sm={5} md={3} lg={3}>
                     <Grid item>
-                        <Button className={classes.switchFormButton} onClick={() => history.push("/login")}>Login</Button>
+                        <Button className={classes.switchFormButton} onClick={() => history.push("/register")}>Create account</Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -84,7 +84,7 @@ const LoginForm = (props) => {
                 <form className={classes.form} onSubmit={handleLogin}>
                     <Grid container spacing={6}>
                         <Grid item>
-                            <Typography variant="h4" className={classes.formHeading}>Create an account.</Typography>
+                            <Typography variant="h4" className={classes.formHeading}>Welcome back!</Typography>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                             <FormControl className={classes.formControl}>
@@ -128,7 +128,7 @@ const LoginForm = (props) => {
                         </Grid>
                         <Grid item container justify="center" xs={12} sm={12} md={12} lg={12}>
                             <Button type="submit" variant="contained" size="large" className={classes.submitButton}>
-                                Create
+                                Login
                             </Button>
                         </Grid>
                     </Grid>
@@ -141,8 +141,8 @@ const LoginForm = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        register: (credentials) => {
-            dispatch(register(credentials));
+        login: (credentials) => {
+            dispatch(login(credentials));
         },
     };
 };
