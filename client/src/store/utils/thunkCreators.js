@@ -5,7 +5,7 @@ import {
   addConversation,
   setNewMessage,
   setSearchedUsers,
-  setReadMessages 
+  setReadMessages
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 import { setActiveChat } from '../activeConversation';
@@ -99,7 +99,7 @@ const sendMessage = (data, body) => {
 export const postMessage = (body) => async (dispatch) => {
   try {
     const data = await saveMessage(body);
-    
+
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
     } else {
@@ -131,11 +131,11 @@ const sendReadMessages = (conversationId, lastReadMessageId) => {
 export const markAsRead = (conversationId, username, numberOfUnreadMessages, userId, lastReadMessage) => async (dispatch) => {
   try {
     if (numberOfUnreadMessages !== 0) {
-      await axios.patch(`/api/messages/${conversationId}`);
+      await axios.patch(`/api/messages/read`, { conversationId });
       dispatch(setReadMessages(conversationId, userId));
       sendReadMessages(conversationId, lastReadMessage.id);
     }
-    
+
     dispatch(setActiveChat(username));
   } catch (error) {
     console.error(error);

@@ -43,9 +43,9 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.patch("/:conversationId", async (req, res, next) => {
+router.patch("/read", async (req, res, next) => {
   try {
-    const conversationId = req.params.conversationId;
+    const { conversationId } = req.body;
     const messages = await Message.findAll({ where: { conversationId, read: false } });
 
     for (const message of messages) {
