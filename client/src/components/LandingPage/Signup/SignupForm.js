@@ -79,7 +79,7 @@ const SignupForm = (props) => {
 
     return (
         <>
-            <Grid className={classes.switchFormContainer} item xs={12} sm={12} md={12} lg={12} container justify="flex-end" alignItems="center" spacing={5}>
+            <Grid className={classes.switchFormContainer} item xs={12} sm={12} md={12} lg={12} container justify="flex-end" alignItems="center" >
                 <Grid item xs={12} sm={7} md={9} lg={9}>
                     <Typography className={classes.switchFormText}>Already have an account?</Typography>
                 </Grid>
