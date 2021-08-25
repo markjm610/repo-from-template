@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'right',
         [theme.breakpoints.down('sm')]: {
             textAlign: 'center',
-            marginTop: 30
         }
     },
     switchFormButton: {
@@ -79,11 +78,11 @@ const SignupForm = (props) => {
 
     return (
         <>
-            <Grid className={classes.switchFormContainer} item xs={12} sm={12} md={12} lg={12} container justify="flex-end" alignItems="center" >
-                <Grid item xs={12} sm={7} md={9} lg={9}>
+            <Grid item xs={12} sm={12} md={12} lg={12} container justify="flex-end" alignItems="center" alignContent="center" spacing={5}>
+                <Grid item xs={12} sm={12} md={9} lg={9}>
                     <Typography className={classes.switchFormText}>Already have an account?</Typography>
                 </Grid>
-                <Grid item container justify="center" xs={12} sm={5} md={3} lg={3}>
+                <Grid item container justify="center" xs={12} sm={12} md={3} lg={3}>
                     <Grid item>
                         <Button className={classes.switchFormButton} onClick={() => history.push("/login")}>Login</Button>
                     </Grid>
