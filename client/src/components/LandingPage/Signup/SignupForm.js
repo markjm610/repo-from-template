@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -7,7 +7,6 @@ import {
     Button,
     FormControl,
     TextField,
-    FormHelperText,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { register } from "../../../store/utils/thunkCreators";
@@ -71,7 +70,7 @@ const SignupForm = (props) => {
 
     return (
         <>
-            <Grid item xs={12} sm={12} md={12} lg={12} container justify="flex-end" alignItems="center" alignContent="center" spacing={5}>
+            <Grid xs={12} sm={12} md={12} lg={12} container justify="flex-end" alignItems="center" alignContent="center" spacing={5}>
                 <Grid item xs={12} sm={12} md={9} lg={9}>
                     <Typography className={classes.switchFormText}>Already have an account?</Typography>
                 </Grid>

@@ -7,18 +7,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import sideImage from '../../images/bg-img.png';
 
 const useStyles = makeStyles((theme) => ({
-    sideImage: {
-        height: '100vh',
-        width: '100%',
-        zIndex: 1,
-        position: 'absolute'
-    },
     sideImageOverlay: {
         height: '100%',
         width: '100%',
         backgroundImage: `linear-gradient(rgba(58, 141, 255, 0.85), rgba(134, 185, 255, 0.85)), url(${sideImage})`,
         backgroundSize: 'cover',
         color: 'white',
+        [theme.breakpoints.down('sm')]: {
+            display: 'none'
+        }
     },
     sideImageGrid: {
         height: '100%'
