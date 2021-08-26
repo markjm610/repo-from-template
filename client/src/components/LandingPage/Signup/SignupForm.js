@@ -66,12 +66,6 @@ const SignupForm = (props) => {
         const username = event.target.username.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        const confirmPassword = event.target.confirmPassword.value;
-
-        if (password !== confirmPassword) {
-            setFormErrorMessage({ confirmPassword: "Passwords must match" });
-            return;
-        }
 
         await register({ username, email, password });
     };
@@ -121,7 +115,7 @@ const SignupForm = (props) => {
                             </FormControl>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
-                            <FormControl error={!!formErrorMessage.confirmPassword} className={classes.formControl}>
+                            <FormControl className={classes.formControl}>
                                 <TextField
                                     InputLabelProps={textFieldInputLabelProps}
                                     aria-label="password"
@@ -132,26 +126,6 @@ const SignupForm = (props) => {
                                     required
                                     className={classes.textField}
                                 />
-                                <FormHelperText>
-                                    {formErrorMessage.confirmPassword}
-                                </FormHelperText>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={12}>
-                            <FormControl error={!!formErrorMessage.confirmPassword} className={classes.formControl}>
-                                <TextField
-                                    InputLabelProps={textFieldInputLabelProps}
-                                    label="Confirm Password"
-                                    aria-label="confirm password"
-                                    type="password"
-                                    inputProps={{ minLength: 6 }}
-                                    name="confirmPassword"
-                                    required
-                                    className={classes.textField}
-                                />
-                                <FormHelperText>
-                                    {formErrorMessage.confirmPassword}
-                                </FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item container justify="center" xs={12} sm={12} md={12} lg={12}>
