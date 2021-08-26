@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#3A8DFF",
         color: 'white',
         height: 60,
-        width: 160
+        width: 160,
+        boxShadow: 'none'
     }
 }));
 
