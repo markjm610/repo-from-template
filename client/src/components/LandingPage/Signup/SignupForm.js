@@ -59,7 +59,6 @@ const SignupForm = (props) => {
     const classes = useStyles();
     const history = useHistory();
     const { register } = props;
-    const [formErrorMessage, setFormErrorMessage] = useState({});
 
     const handleRegister = async (event) => {
         event.preventDefault();
