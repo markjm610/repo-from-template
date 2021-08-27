@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "./store/utils/thunkCreators";
-import Signup from "./Signup.js";
-import Login from "./Login.js";
 import { Home, SnackbarError } from "./components";
+import Login from "./components/LandingPage/Login";
+import Signup from "./components/LandingPage/Signup";
+
 
 const Routes = (props) => {
   const { user, fetchUser } = props;
